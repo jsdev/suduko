@@ -6,10 +6,8 @@ const SudokuGrid = () => {
 
   const handleCellChange = (rowIndex, colIndex, value) => {
     const newGrid = [...grid];
-    if (value === '' || (value >= 0 && value <= 9)) {
-      newGrid[rowIndex][colIndex] = value;
-      setGrid(newGrid);
-    }
+    newGrid[rowIndex][colIndex] = value;
+    setGrid(newGrid);
   };
 
   return (
@@ -18,11 +16,12 @@ const SudokuGrid = () => {
         row.map((cell, colIndex) => (
           <Input
             key={`${rowIndex}-${colIndex}`}
-            type="text"
-            value={cell}
+            type="number"
+            value={cell || ''}
             onChange={(e) => handleCellChange(rowIndex, colIndex, e.target.value)}
             className="w-10 h-10 text-center border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
-            maxLength={1}
+            min={1}
+            max={9}
           />
         ))
       ))}
